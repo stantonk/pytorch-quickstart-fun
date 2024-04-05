@@ -2,7 +2,7 @@
 
 import torch
 from torch import nn
-from torch.nn.modules.loss import _WeightedLoss, CrossEntropyLoss
+from torch.nn.modules.loss import CrossEntropyLoss
 from torch.optim import Optimizer
 from torch.utils.data import DataLoader
 from torchvision import datasets
