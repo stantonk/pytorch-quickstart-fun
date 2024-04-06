@@ -42,19 +42,32 @@ https://pytorch.org/tutorials/beginner/basics/autogradqs_tutorial.html
 Optional Reading: Tensor Gradients and Jacobian Products
 
 ## Optimizing Model Parameters
+
+optimizing_model_parameters.py
+
 https://pytorch.org/tutorials/beginner/basics/optimization_tutorial.html
 
 * [Different kinds of Optimizers](https://pytorch.org/docs/stable/optim.html)
 * Additional good reading: https://pytorch.org/docs/stable/notes/autograd.html
 
+## Save and Load the Model
+https://pytorch.org/tutorials/beginner/basics/saveloadrun_tutorial.html
+
+save_and_load_model.py
+
+
+
+### related tutorials:
+* https://pytorch.org/tutorials/recipes/recipes/saving_and_loading_a_general_checkpoint.html
+* https://pytorch.org/tutorials/recipes/recipes/module_load_state_dict_tips.html?highlight=loading%20nn%20module%20from%20checkpoint
+
+## General notes
 
 * [PyTorch's API](https://pytorch.org/tutorials/beginner/basics/quickstart_tutorial.html)
 
 Dataset, DataLoader
 
 PyTorch has datasets included:
-
-
 
 * [Text datasets](https://pytorch.org/text/stable/datasets.html)
 * [Image datasets](https://pytorch.org/vision/stable/datasets.html)
