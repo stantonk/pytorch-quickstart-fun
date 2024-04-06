@@ -9,6 +9,8 @@ import matplotlib.pyplot as plt
 
 from lib import get_device
 
+TRAIN = False
+
 ### Working with data
 
 # Download training data from open datasets.
@@ -105,20 +107,21 @@ def test(dataloader, model, loss_fn):
     correct /= size
     print(f"Test Error: \n Accuracy: {(100*correct):>0.1f}%, Avg loss: {test_loss:>8f} \n")
 
-### TRAINING
 
-# epochs = 54
-# # learning rate started slowing down a lot at Epoch 54
-# # it did keep improving at least up to Epoch 79
-# for t in range(epochs):
-#     print(f"Epoch {t+1}\n-------------------------------")
-#     train(train_dataloader, model, loss_fn, optimizer)
-#     test(test_dataloader, model, loss_fn)
-# print("Done!")
-#
-# ### Saving Models
-# torch.save(model.state_dict(), "model.pth")
-# print("Saved PyTorch Model State to model.pth")
+### TRAINING
+if TRAIN:
+    epochs = 54
+    # learning rate started slowing down a lot at Epoch 54
+    # it did keep improving at least up to Epoch 79
+    for t in range(epochs):
+        print(f"Epoch {t+1}\n-------------------------------")
+        train(train_dataloader, model, loss_fn, optimizer)
+        test(test_dataloader, model, loss_fn)
+    print("Done!")
+
+    ### Saving Models
+    torch.save(model.state_dict(), "model.pth")
+    print("Saved PyTorch Model State to model.pth")
 
 
 
@@ -167,9 +170,13 @@ print(f'accuracy = {(correct_predictions / float(predictions)) * 100.0}%')
 from PIL import Image
 raw_images_and_labels = [
     ('./testimg1.png', class_to_index['T-shirt/top']),
+    ('./testimg1-white.png', class_to_index['T-shirt/top']),
     ('./testimg2.png', class_to_index['T-shirt/top']),
+    ('./testimg2-white.png', class_to_index['T-shirt/top']),
     ('./testimg3.png', class_to_index['T-shirt/top']),
+    ('./testimg3-white.png', class_to_index['T-shirt/top']),
     ('./testimg4.png', class_to_index['Sneaker']),
+    ('./testimg4-white.png', class_to_index['Sneaker']),
 ]
 
 images_and_labels = []
@@ -183,7 +190,7 @@ for img_path, class_index in raw_images_and_labels:
 with torch.no_grad():
     fig = plt.figure(figsize=(20, 7))
     for i, (img, class_index) in enumerate(images_and_labels):
-        ax = fig.add_subplot(2, 2, i + 1, xticks=[], yticks=[])
+        ax = fig.add_subplot(4, 2, i + 1, xticks=[], yticks=[])
         imgTensor = ToTensor()(img)
         imgTensor = imgTensor.to(device)
         # print(imgTensor.shape)
@@ -192,5 +199,6 @@ with torch.no_grad():
         pred = model(imgTensor)
         predicted, actual = pred[0].argmax(0), class_index
         print(f'Predicted: "{predicted}", Actual: "{actual}"')
-        ax.set_title(f'predicted {classes[predicted]} actual {classes[class_index]}')
+        color = 'green' if classes[predicted] == classes[class_index] else 'red'
+        ax.set_title(f'predicted {classes[predicted]} actual {classes[class_index]}', color=color)
     plt.show()
