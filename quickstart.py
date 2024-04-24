@@ -1,4 +1,5 @@
 # https://pytorch.org/tutorials/beginner/basics/quickstart_tutorial.html
+import sys
 import numpy as np
 import torch
 from torch import nn
@@ -9,7 +10,8 @@ import matplotlib.pyplot as plt
 
 from lib import get_device
 
-TRAIN = False
+# set this to False once the model is trained
+TRAIN = True
 
 ### Working with data
 
@@ -117,19 +119,23 @@ if TRAIN:
         print(f"Epoch {t+1}\n-------------------------------")
         train(train_dataloader, model, loss_fn, optimizer)
         test(test_dataloader, model, loss_fn)
+        torch.save(model.state_dict(), "models/model.pth")
+        print("Saved PyTorch Model State to models/model.pth")
     print("Done!")
 
     ### Saving Models
-    torch.save(model.state_dict(), "model.pth")
-    print("Saved PyTorch Model State to model.pth")
 
 
 
 
 ### Loading Models
 
-model = NeuralNetwork().to(device)
-model.load_state_dict(torch.load("model.pth"))
+# model = NeuralNetwork().to(device)
+try:
+    model.load_state_dict(torch.load("models/model.pth"))
+except Exception as e:
+    print("Error: Are you sure you've trained the model? (failure cause:%s)" % e)
+    sys.exit(1)
 
 ### Make predictions / inference
 

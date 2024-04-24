@@ -23,8 +23,8 @@ model.eval()
 # because the class defines the structure of a network. We might want to save
 # the structure of this class together with the model, in which case we can
 # pass model (and not model.state_dict()) to the saving function:
-torch.save(model, 'model.pth')
+torch.save(model, 'models/model.pth')
 
 # We can then load the model like this:
 
-model = torch.load('model.pth')
+model = torch.load('models/model.pth')
