@@ -95,6 +95,7 @@ Predicted: "5", Actual: "0"
 Predicted: "8", Actual: "7"
 Predicted: "0", Actual: "7"
 ```
+# Quick links to the tutorial and it's parts, plus other interesting/useful docs
 
 # basic tutorial
 
